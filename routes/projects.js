@@ -1,24 +1,32 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../db');
+const Projet = require('../models/project'); // Importez le modèle Sequelize
 
-router.get('/projects', (req, res) => {
-  pool.query('SELECT * FROM project', (error, results) => {
-    if (error) {
-      throw error;
-    }
-    res.status(200).json(results.rows);
-  });
+// GET all projets
+router.get('/projects', async (req, res) => {
+  try {
+    const projects = await Project.findAll();
+    res.status(200).json(projects);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Une erreur est survenue lors de la récupération des projets.');
+  }
 });
 
-router.get('/projects/:id', (req, res) => {
+// GET a single projet by ID
+router.get('/projects/:id', async (req, res) => {
   const id = req.params.id;
-  pool.query('SELECT * FROM project WHERE id = $1', [id], (error, results) => {
-    if (error) {
-      throw error;
+  try {
+    const project = await Project.findByPk(id);
+    if (project) {
+      res.status(200).json(project);
+    } else {
+      res.status(404).send('Projet non trouvé.');
     }
-    res.status(200).json(results.rows);
-  });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Une erreur est survenue lors de la récupération du projet.');
+  }
 });
 
 module.exports = router;

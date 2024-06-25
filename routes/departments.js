@@ -1,26 +1,32 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../db');
+const Department = require('../models/department'); // Importez le modèle Sequelize pour les départements
 
 // GET all departments
-router.get('/departments', (req, res) => {
-  pool.query('SELECT * FROM department', (error, results) => {
-    if (error) {
-      throw error;
-    }
-    res.status(200).json(results.rows);
-  });
+router.get('/departments', async (req, res) => {
+  try {
+    const departments = await Department.findAll();
+    res.status(200).json(departments);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Une erreur est survenue lors de la récupération des départements.');
+  }
 });
 
 // GET a single department by code
-router.get('/departments/:code', (req, res) => {
+router.get('/departments/:code', async (req, res) => {
   const code = req.params.code;
-  pool.query('SELECT * FROM department WHERE code = $1', [code], (error, results) => {
-    if (error) {
-      throw error;
+  try {
+    const department = await Department.findOne({ where: { code: code } });
+    if (department) {
+      res.status(200).json(department);
+    } else {
+      res.status(404).send('Département non trouvé.');
     }
-    res.status(200).json(results.rows);
-  });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Une erreur est survenue lors de la récupération du département.');
+  }
 });
 
 module.exports = router;
