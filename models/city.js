@@ -8,7 +8,7 @@ const City = sequelize.define(
       type: DataTypes.STRING,
       primaryKey: true,
     },
-    city_name: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },

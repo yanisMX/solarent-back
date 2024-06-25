@@ -4,15 +4,15 @@ const sequelize = require("../sequelize");
 const Department = sequelize.define(
   "Department",
   {
-    departement_code: {
+    code: {
       type: DataTypes.INTEGER,
       primaryKey: true,
     },
-    departement_name: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    departement_sun_rate: {
+    sun_rate: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
