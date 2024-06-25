@@ -1,13 +1,26 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../sequelize');
+const { Sequelize, DataTypes } = require("sequelize");
+const sequelize = require("../sequelize");
 
-const Department = sequelize.define('department', {
-  code: {
-    type: Sequelize.INTEGER,
-    primaryKey: true
+const Department = sequelize.define(
+  "Department",
+  {
+    departement_code: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+    },
+    departement_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    departement_sun_rate: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
-  name: Sequelize.STRING,
-  sun_rate: Sequelize.INTEGER
-});
+  {
+    tableName: "department",
+    timestamps: false,
+  }
+);
 
 module.exports = Department;

@@ -1,39 +1,30 @@
-'use strict';
+"use strict";
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('cities', {
+    await queryInterface.createTable("city", {
       code_name: {
         type: Sequelize.STRING,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       total_count: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       coordinates: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       departement_code: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       state_code: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('cities');
-  }
+    await queryInterface.dropTable("city");
+  },
 };
-
