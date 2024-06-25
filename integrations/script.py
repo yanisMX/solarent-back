@@ -2,6 +2,7 @@ import pandas as pd
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 
+# Informations de connexion à la base de données Neon
 PGHOST = 'ep-holy-hall-a2zqeezj.eu-central-1.aws.neon.tech'
 PGDATABASE = 'solarent_db'
 PGUSER = 'solarent_db_owner'
@@ -52,10 +53,11 @@ departments_df.rename(columns={ensoleillement_df.columns[1]: 'sun_rate'}, inplac
 
 states_df = installations_df[['state_code', 'state_name']].drop_duplicates()
 
-cities_df = installations_df[['code_name', 'coordinates', 'total_count', 'departement_code', 'state_code']]
+cities_df = installations_df[['code_name', 'city_name', 'coordinates', 'total_count', 'departement_code', 'state_code']]
 cities_df.drop_duplicates(inplace=True)
 cities_df.rename(columns={
     'code_name': 'code_name',
+    'city_name': 'city_name',
     'coordinates': 'coordinates',
     'total_count': 'total_count',
     'departement_code': 'departement_code',
