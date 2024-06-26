@@ -4,11 +4,11 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const sequelize = require("./sequelize");
-const cors = require("cors");
 const indexRouter = require("./routes/index");
 const citiesRouter = require("./routes/cities"); // Importez le routeur pour les villes
 const departmentsRouter = require("./routes/departments");
 const projectsRouter = require("./routes/projects");
+const cors = require("cors");
 const statesRouter = require("./routes/states");
 
 const app = express();
@@ -49,5 +49,3 @@ sequelize
   });
 
 module.exports = app;
-
-console.log("c'est moi qu'est ce que tu fais sur mon ordi ?");
