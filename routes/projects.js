@@ -1,20 +1,25 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Projet = require('../models/project'); // Importez le modèle Sequelize
+const Project = require("../models/project"); // Importez le modèle Sequelize
 
 // GET all projets
-router.get('/projects', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const projects = await Project.findAll();
     res.status(200).json(projects);
   } catch (error) {
+    console.log(projects);
     console.error(error);
-    res.status(500).send('Une erreur est survenue lors de la récupération des projets.');
+    res
+      .status(500)
+      .send(
+        'Une erreur est survenue lors de la récupération des projets.'
+      );
   }
 });
 
 // GET a single projet by ID
-router.get('/projects/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   const id = req.params.id;
   try {
     const project = await Project.findByPk(id);

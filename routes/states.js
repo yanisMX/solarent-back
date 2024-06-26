@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const State = require('../models/state'); // Importez le modèle Sequelize pour les états
+const State = require("../models/state"); // Importez le modèle Sequelize pour les états
 
 // GET all states
-router.get('/states', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const states = await State.findAll();
     res.status(200).json(states);
@@ -14,7 +14,7 @@ router.get('/states', async (req, res) => {
 });
 
 // GET a single state by state_code
-router.get('/states/:state_code', async (req, res) => {
+router.get('/:code', async (req, res) => {
   const state_code = req.params.state_code;
   try {
     const state = await State.findOne({ where: { code: state_code } });
