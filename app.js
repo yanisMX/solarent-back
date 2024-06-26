@@ -4,7 +4,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const sequelize = require("./sequelize");
-
+const cors = require("cors");
 const indexRouter = require("./routes/index");
 const citiesRouter = require("./routes/cities"); // Importez le routeur pour les villes
 const departmentsRouter = require("./routes/departments");
@@ -12,7 +12,7 @@ const projectsRouter = require("./routes/projects");
 const statesRouter = require("./routes/states");
 
 const app = express();
-
+app.use(cors({ origin: "http://localhost:3000" || "http://localhost:5174" }));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
